@@ -10,7 +10,10 @@ public class TheaterConverter {
 
     public static TheaterEntity dtoToEntity(TheaterDto theaterDto){
         return TheaterEntity.builder().id(theaterDto.getId()).address(theaterDto.getAddress())
-                .city(theaterDto.getCity()).name(theaterDto.getName()).build();
+                .city(theaterDto.getCity()).
+                name(theaterDto.getName()).
+                type(theaterDto.getTheaterType()).
+                build();
     }
 
     public static TheaterDto entityToDto(TheaterEntity theaterEntity){

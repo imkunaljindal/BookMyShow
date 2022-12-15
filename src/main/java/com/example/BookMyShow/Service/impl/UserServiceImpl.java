@@ -15,10 +15,11 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public void addUser(UserDto userDto){
+    public UserDto addUser(UserDto userDto){
 
         UserEntity userEntity = UserConverter.dtoToEntity(userDto);
         userRepository.save(userEntity);
+        return userDto;
     }
 
     @Override

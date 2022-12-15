@@ -18,6 +18,8 @@ public class TheaterDto {
 
     String city;
 
+    TheaterType theaterType;
+
     //Seats ---> Think should we put or not
 
     //Show Entity
