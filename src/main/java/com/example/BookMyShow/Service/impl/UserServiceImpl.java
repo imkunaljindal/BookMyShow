@@ -8,10 +8,8 @@ import com.example.BookMyShow.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class UserServiceimpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
