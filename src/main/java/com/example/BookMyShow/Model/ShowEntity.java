@@ -43,10 +43,13 @@ public class ShowEntity {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    //Must required in DTO
     @ManyToOne
     @JsonIgnore
     private MovieEntity movie;
 
+
+    //Must required ?
     @ManyToOne
     @JsonIgnore
     private TheaterEntity theater;
@@ -54,6 +57,7 @@ public class ShowEntity {
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TicketEntity> tickets;
+
 
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     @JsonIgnore

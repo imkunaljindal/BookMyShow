@@ -1,24 +1,26 @@
 package com.example.BookMyShow.converter;
 
 import com.example.BookMyShow.Model.TheaterEntity;
-import com.example.BookMyShow.dto.TheaterDto;
+import com.example.BookMyShow.dto.EntryDto.TheaterEntryDto;
+import com.example.BookMyShow.dto.ResponseDto.TheaterResponseDto;
 import lombok.experimental.UtilityClass;
-import org.hibernate.annotations.ValueGenerationType;
 
 @UtilityClass
 public class TheaterConverter {
 
-    public static TheaterEntity dtoToEntity(TheaterDto theaterDto){
-        return TheaterEntity.builder().id(theaterDto.getId()).address(theaterDto.getAddress())
-                .city(theaterDto.getCity()).
-                name(theaterDto.getName()).
-                type(theaterDto.getTheaterType()).
-                build();
+    public static TheaterEntity convertDtoToEntity(TheaterEntryDto theaterEntryDto){
+
+        return TheaterEntity.builder().address(theaterEntryDto.getAddress())
+                .city(theaterEntryDto.getCity()).name(theaterEntryDto.getName()).build();
+
+
     }
 
-    public static TheaterDto entityToDto(TheaterEntity theaterEntity){
+    public static TheaterResponseDto convertEntityToDto(TheaterEntity theaterEntity){
 
-        return TheaterDto.builder().id(theaterEntity.getId()).name(theaterEntity.getName())
-                .city(theaterEntity.getCity()).address(theaterEntity.getAddress()).build();
+        return TheaterResponseDto.builder().id(theaterEntity.getId()).name(theaterEntity.getName())
+                .city(theaterEntity.getCity()).address(theaterEntity.getAddress())
+                .type(theaterEntity.getType())
+                .build();
     }
 }

@@ -4,7 +4,9 @@ import com.example.BookMyShow.Model.UserEntity;
 import com.example.BookMyShow.Repository.UserRepository;
 import com.example.BookMyShow.Service.UserService;
 import com.example.BookMyShow.converter.UserConverter;
-import com.example.BookMyShow.dto.UserDto;
+import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
+import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
+import com.example.BookMyShow.dto.ResponseDto.UserResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +17,21 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public UserDto addUser(UserDto userDto){
+    public void addUser(UserEntryDto userEntryDto) {
 
-        UserEntity userEntity = UserConverter.dtoToEntity(userDto);
+        UserEntity userEntity = UserConverter.convertDtoToEntity(userEntryDto); //Cleaner
         userRepository.save(userEntity);
-        return userDto;
     }
 
     @Override
-    public UserDto getUser(int id){
+    public UserResponseDto getUser(int id) {
+
+        UserEntity user = new UserEntity(); //By default user.
 
         UserEntity userEntity = userRepository.findById(id).get();
-        UserDto userDto = UserConverter.entityToDto(userEntity);
-        return userDto;
+
+        UserResponseDto userResponseDto = UserConverter.convertEntityToDto(userEntity);
+
+        return userResponseDto;
     }
 }
