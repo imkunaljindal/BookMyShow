@@ -25,6 +25,7 @@ public class TicketController {
     public TicketResponseDto addTicket(@RequestBody() BookTicketRequestDto bookTicketRequestDto){
 
 
+        log.info("In controller");
         return ticketService.bookTicket(bookTicketRequestDto);
 
     }

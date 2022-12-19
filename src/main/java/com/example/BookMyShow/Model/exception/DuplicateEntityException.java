@@ -1,4 +1,4 @@
-package com.example.BookMyShow.exception;
+package com.example.BookMyShow.Model.exception;
 
 public class DuplicateEntityException extends RuntimeException{
 

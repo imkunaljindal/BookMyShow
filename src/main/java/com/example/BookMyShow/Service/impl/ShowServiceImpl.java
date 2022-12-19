@@ -48,10 +48,8 @@ public class ShowServiceImpl implements ShowService {
 
 
         //We need to pass the list of the theater seats
-        generateShowEntitySeats(theaterEntity.getSeats(),showEntity);
-
-
-
+        List<ShowSeatsEntity> showSeatsEntityList = generateShowEntitySeats(theaterEntity.getSeats(),showEntity);
+        showSeatsRepository.saveAll(showSeatsEntityList);
         //We need to create Response Show Dto.
 
         ShowResponseDto showResponseDto = ShowConvertor.convertEntityToDto(showEntity,showEntryDto);
@@ -59,7 +57,7 @@ public class ShowServiceImpl implements ShowService {
         return showResponseDto;
     }
 
-    public void generateShowEntitySeats(List<TheaterSeatsEntity> theaterSeatsEntityList,ShowEntity showEntity){
+    public List<ShowSeatsEntity> generateShowEntitySeats(List<TheaterSeatsEntity> theaterSeatsEntityList,ShowEntity showEntity){
 
         List<ShowSeatsEntity> showSeatsEntityList = new ArrayList<>();
 
@@ -86,10 +84,8 @@ public class ShowServiceImpl implements ShowService {
             showSeatsEntity.setShow(showEntity);
         }
 
-        showSeatsRepository.saveAll(showSeatsEntityList);
-
-
         showEntity.setSeats(showSeatsEntityList);
+        return showSeatsEntityList;
 
     }
 

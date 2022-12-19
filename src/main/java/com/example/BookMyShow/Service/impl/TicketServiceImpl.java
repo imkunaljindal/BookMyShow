@@ -15,6 +15,7 @@ import com.example.BookMyShow.dto.BookTicketRequestDto;
 import com.example.BookMyShow.dto.ResponseDto.TicketResponseDto;
 import com.example.BookMyShow.dto.TicketDto;
 import com.example.BookMyShow.enums.SeatType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TicketServiceImpl implements TicketService {
 
     @Autowired
@@ -55,10 +57,14 @@ public class TicketServiceImpl implements TicketService {
         UserEntity userEntity = userRepository.findById(bookTicketRequestDto.getId()).get();
         ShowEntity showEntity = showRepository.findById(bookTicketRequestDto.getShowId()).get();
 
+        log.info("Ticket half processed");
+
         Set<String> requestSeats = bookTicketRequestDto.getRequestedSeats();
 
 
         List<ShowSeatsEntity> showSeatsEntityList = showEntity.getSeats();
+
+       // for(ShowSeatsEntity seat: showSeatsEntityList) System.out.print(seat+" ");
 
 
 //        //Another way to iterate. Try to study about it.
@@ -79,6 +85,7 @@ public class TicketServiceImpl implements TicketService {
             }
         }
 
+        for(ShowSeatsEntity seat: bookedSeats) System.out.println(seat);
         if(bookedSeats.size()!=requestSeats.size()){
             //Al the seats were not avaiable
             throw new Error("All Seats not available");
